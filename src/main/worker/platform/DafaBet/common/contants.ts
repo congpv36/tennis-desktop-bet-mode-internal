@@ -51,11 +51,8 @@ export const buildHeadersCoupons = (account: { customIP?: string | null }) => ({
   ...(account.customIP ? { 'X-Forwarded-For': account.customIP } : {})
 })
 
-// TODO: hash is tied to the current frontend build and may need to be refreshed later
-export const EVENTS_API_HASH = 'f0b1342551a31e1063f924330519bbb7'
 export const EVENTS_API_LOCALE = 'en-GB'
 
-// Dafabet's sentinel for "no value" on numeric fields (e.g. outcome.extraKey2 when there is no split line)
 export const NO_VALUE_DAFABET = -1234567890000000000
 
 export const buildHeadersEvents = (account: { customIP?: string | null }) => ({

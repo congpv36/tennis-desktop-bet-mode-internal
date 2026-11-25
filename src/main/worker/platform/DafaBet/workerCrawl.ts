@@ -163,8 +163,8 @@ const fetchPreMatchEvents = async (account: AccountType, proxyAgent?: HttpsProxy
 
   if (!isAccountActive(account.id)) return null
 
-  const url = buildEventsUrl()
   const body = JSON.stringify(buildEventsPayload(eventPathIdsStr, 1, dateRange))
+  const url = buildEventsUrl(body)
 
   const events = await fetchJson<EventItem_DafaBet[]>(
     url,

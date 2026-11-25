@@ -1,8 +1,9 @@
+import { createHash } from 'crypto'
+
 import { SPREAD, TARGET_TYPE, TOTAL } from '@shared/common/constants'
 import { AccountType } from '@shared/common/types'
 
 import {
-  EVENTS_API_HASH,
   EVENTS_API_LOCALE,
   getBaseUrl,
   NO_VALUE_DAFABET
@@ -29,8 +30,9 @@ export function buildCouponsUrl(couponId: string | number) {
   return `https://sports.dafabet.com/api/coupons/${couponId}?coupon_info=true&pub=${Math.floor(Date.now() / 1000)}&l=en&mc=web`
 }
 
-export function buildEventsUrl() {
-  return `https://sports.dafabet.com/xapi/rest/events?hash=${EVENTS_API_HASH}&l=${EVENTS_API_LOCALE}`
+export function buildEventsUrl(body: string) {
+  const hash = createHash('md5').update(body).digest('hex')
+  return `https://sports.dafabet.com/xapi/rest/events?hash=${hash}&l=${EVENTS_API_LOCALE}`
 }
 
 export function buildEventDetailUrl(eventId: string | number, isRunning = false) {
@@ -70,6 +72,8 @@ export function getCookieValue(cookie: string, name: string) {
   return match ? match[1] : ''
 }
 
+const MAX_MARKET_PER_EVENT = 50
+
 export function buildLiveEventsUrl() {
   const params = new URLSearchParams({
     allBettableEvents: 'true',
@@ -93,7 +97,7 @@ export function buildLiveEventsUrl() {
     excludeLongTermSuspended: 'true',
     excludeMarketByOpponent: 'true',
     maxMarketsPerMarketType: '5',
-    maxMarketPerEvent: '100',
+    maxMarketPerEvent: String(MAX_MARKET_PER_EVENT),
     l: EVENTS_API_LOCALE
   })
 
@@ -207,7 +211,7 @@ export function buildEventsPayload(
     excludeLongTermSuspended: true,
     excludeMarketByOpponent: true,
     maxMarketsPerMarketType: 5,
-    maxMarketPerEvent: 100,
+    maxMarketPerEvent: String(MAX_MARKET_PER_EVENT),
     marketTypeIds: '68,1028,10068',
     periodTypeIds: '109,110'
   }
