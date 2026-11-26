@@ -54,7 +54,8 @@ const accountSchema = `
         host TEXT,
         socketUrl TEXT,
         parent_id TEXT,
-        uid TEXT
+        uid TEXT,
+        ltype TEXT
       `
 
 export default accountSchema

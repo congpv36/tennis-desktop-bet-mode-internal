@@ -283,6 +283,7 @@ export type AccountType = {
   socketUrl: string
   parent_id: string | null
   uid: string
+  ltype: string | null
 }
 
 export type SwitchAccountType = AccountType & {

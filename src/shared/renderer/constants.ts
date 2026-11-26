@@ -55,7 +55,8 @@ export const EMPTY_ACCOUNT: AccountType = {
   host: '',
   socketUrl: '',
   parent_id: null,
-  uid: ''
+  uid: '',
+  ltype: null
 }
 
 export const VALUE_DEFAULT_ODDS_SETTING = {

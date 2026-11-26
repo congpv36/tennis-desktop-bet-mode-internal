@@ -48,6 +48,7 @@ async function loginToSingBet(port: MessagePort, account: AccountType) {
       { id: account.id },
       {
         uid: dataJson.uid,
+        ltype: dataJson.ltype ? String(dataJson.ltype) : '3',
         cookie
       }
     ) as AccountType
